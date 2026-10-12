@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horario WS 2026/27 — Angie Moreno Trevejo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Horario WS 2026/27</h1>
+      <p class="subtitle">M.Sc. Geowissenschaften — Universit&auml;t Bonn</p>
+      <p class="meta">Actualizado: 12.10.2026 &middot; Campus Poppelsdorf</p>
+    </header>
+
+    <div class="tz-toggle">
+      <button class="tz-btn active" data-tz="de">&#127465;&#127466; Bonn</button>
+      <button class="tz-btn" data-tz="pe">&#127477;&#127466; Lima</button>
+    </div>
+
+    <div class="grid">
+      <!-- Header row -->
+      <div class="grid-header time-col">Hora</div>
+      <div class="grid-header">Lun</div>
+      <div class="grid-header">Mar</div>
+      <div class="grid-header">Mi&eacute;</div>
+      <div class="grid-header">Jue</div>
+
+      <!-- Time slots rendered by JS -->
+    </div>
+
+    <section class="legend">
+      <h2>Cursos</h2>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-mg14)"></span>
+          <div>
+            <strong>MG14</strong> Geoscientific Programming
+            <span class="tag">Prof. Muniruzzaman</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-bw37)"></span>
+          <div>
+            <strong>BW37</strong> Digitale Karte in der Geologie
+            <span class="tag">Dr. Valdivia-Manchego</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-mg15)"></span>
+          <div>
+            <strong>MG15</strong> Environmental Modeling 1
+            <span class="tag">Prof. Muniruzzaman</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-mgp20)"></span>
+          <div>
+            <strong>MGP 20</strong> Planetologie und Kosmochemie
+            <span class="tag">Prof. Luguet</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-deutsch)"></span>
+          <div>
+            <strong>SDK-AS 02</strong> Deutsch A1.1
+            <span class="tag online">Online &middot; Kinga Ruschke</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="dot" style="background: var(--c-mg42)"></span>
+          <div>
+            <strong>MG42</strong> Dynamik der festen Erde
+            <span class="tag">Prof. Henk</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overlap-note">
+      <p>&#9888;&#65039; <strong>Martes:</strong> MG15 V y MGP 20 se cruzan 15 min (13:30-13:45). MGP 20 y MG15 &Uuml; se cruzan 1h 45min (14:00-15:30).</p>
+    </section>
+
+    <footer>
+      <p>Geozentrum: Meckenheimer Allee 176 &middot; IfG: Kirschallee 1-3</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
