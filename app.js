@@ -1,17 +1,17 @@
 (() => {
   "use strict";
 
-  const OFFSET_LIMA = -7; // hours behind Bonn (CEST)
+  const OFFSET_LIMA = -7;
 
   const courses = [
     {
       code: "MG14", type: "V", label: "Geo. Programming",
       day: 0, start: "09:15", end: "11:45",
-      room: "Ü9 Computerraum", building: "MA 176",
+      room: "\u00dc9 Computerraum", building: "MA 176",
       color: "var(--c-mg14)"
     },
     {
-      code: "MG14", type: "Ü", label: "Geo. Programming",
+      code: "MG14", type: "\u00dc", label: "Geo. Programming",
       day: 0, start: "14:15", end: "15:45",
       room: "Computerraum", building: "Kirschallee 1-3",
       color: "var(--c-mg14)"
@@ -23,9 +23,9 @@
       color: "var(--c-deutsch)"
     },
     {
-      code: "BW37", type: "Ü", label: "Digitale Karte",
+      code: "BW37", type: "\u00dc", label: "Digitale Karte",
       day: 1, start: "08:30", end: "10:00",
-      room: "—", building: "",
+      room: "\u2014", building: "",
       color: "var(--c-bw37)"
     },
     {
@@ -37,14 +37,20 @@
     {
       code: "MGP 20", type: "V", label: "Planetologie",
       day: 1, start: "13:30", end: "15:45",
-      room: "U1.009 (Ü7)", building: "MA 176",
+      room: "U1.009 (\u00dc7)", building: "MA 176",
       color: "var(--c-mgp20)", overlap: true
     },
     {
-      code: "MG15", type: "Ü", label: "Env. Modeling 1",
+      code: "MG15", type: "\u00dc", label: "Env. Modeling 1",
       day: 1, start: "14:00", end: "15:30",
       room: "1.017.d", building: "Kirschallee 1-3",
       color: "var(--c-mg15)", overlap: true
+    },
+    {
+      code: "Zumba", type: "", label: "Hochschulsport",
+      day: 1, start: "17:00", end: "18:00",
+      room: "Gymnastiksaal", building: "Nachtigallenweg 86",
+      color: "var(--c-sport)"
     },
     {
       code: "SDK-AS 02", type: "", label: "Deutsch A1.1",
@@ -59,16 +65,23 @@
       color: "var(--c-bw37)"
     },
     {
-      code: "MG42", type: "V", label: "Dynamik d. festen Erde",
-      day: 3, start: "10:15", end: "11:45",
-      room: "—", building: "",
+      code: "MG42", type: "V+\u00dc", label: "3D-Modellierung geol. Strukturen",
+      day: 3, start: "14:15", end: "15:45",
+      room: "0.004 (\u00dc9)", building: "MA 176",
       color: "var(--c-mg42)"
+    },
+    {
+      code: "V\u00f3ley", type: "", label: "Beachvolleyball",
+      day: 4, start: "10:30", end: "12:30",
+      room: "Beachvolleyballpl\u00e4tze 3-6", building: "Nachtigallenweg 86",
+      color: "var(--c-sport)"
     },
   ];
 
   const START_HOUR = 8;
-  const END_HOUR = 20;
-  const SLOT_H = 18; // px per 15-min slot
+  const END_HOUR = 21;
+  const SLOT_H = 18;
+  const DAYS = 5;
   const HEADER_H = 38;
 
   let currentTz = "de";
@@ -95,7 +108,6 @@
 
   function buildGrid() {
     const grid = document.querySelector(".grid");
-    // Clear everything except headers
     const headers = grid.querySelectorAll(".grid-header");
     grid.innerHTML = "";
     headers.forEach(h => grid.appendChild(h));
@@ -103,7 +115,6 @@
     const totalSlots = (END_HOUR - START_HOUR) * 4;
     const dayContainers = [];
 
-    // Build time labels + day columns
     for (let s = 0; s < totalSlots; s++) {
       const totalMin = START_HOUR * 60 + s * 15;
       const isHour = totalMin % 60 === 0;
@@ -115,7 +126,7 @@
       }
       grid.appendChild(label);
 
-      for (let d = 0; d < 4; d++) {
+      for (let d = 0; d < DAYS; d++) {
         const cell = document.createElement("div");
         cell.className = "cell" + (isHour ? " hour-mark" : "");
         cell.style.gridColumn = d + 2;
@@ -123,14 +134,13 @@
       }
     }
 
-    // Overlay containers for each day
-    for (let d = 0; d < 4; d++) {
+    for (let d = 0; d < DAYS; d++) {
       const overlay = document.createElement("div");
       overlay.className = "day-overlay";
       overlay.style.position = "absolute";
       overlay.style.top = HEADER_H + "px";
-      overlay.style.left = `calc(60px + ${d} * ((100% - 60px) / 4))`;
-      overlay.style.width = `calc((100% - 60px) / 4)`;
+      overlay.style.left = `calc(60px + ${d} * ((100% - 60px) / ${DAYS}))`;
+      overlay.style.width = `calc((100% - 60px) / ${DAYS})`;
       overlay.style.height = totalSlots * SLOT_H + "px";
       overlay.style.pointerEvents = "none";
       grid.appendChild(overlay);
@@ -139,7 +149,6 @@
 
     grid.style.position = "relative";
 
-    // Tuesday overlap handling: stack overlapping blocks
     const tuesdayCourses = courses.filter(c => c.day === 1);
 
     courses.forEach(c => {
@@ -155,7 +164,6 @@
       block.style.background = c.color;
       block.style.pointerEvents = "auto";
 
-      // For Tuesday overlapping blocks, offset them
       if (c.day === 1 && c.overlap) {
         const overlapping = tuesdayCourses.filter(o => {
           const oStart = timeToMin(o.start);
@@ -163,7 +171,6 @@
           return o !== c && o.overlap && oStart < endMin && oEnd > startMin;
         });
         if (overlapping.length > 0) {
-          // Find position index among overlapping group
           const group = [c, ...overlapping].sort((a, b) => timeToMin(a.start) - timeToMin(b.start) || a.code.localeCompare(b.code));
           const idx = group.indexOf(c);
           const total = group.length;
@@ -182,17 +189,16 @@
 
       block.innerHTML = `
         <div class="code">${c.code}${typeLabel}</div>
-        <div class="time-range">${displayStart} – ${displayEnd}</div>
-        ${height > SLOT_H * 2 ? `<div class="room">${c.room}${c.building ? " · " + c.building : ""}</div>` : ""}
+        <div class="time-range">${displayStart} \u2013 ${displayEnd}</div>
+        ${height > SLOT_H * 2 ? `<div class="room">${c.room}${c.building ? " \u00b7 " + c.building : ""}</div>` : ""}
       `;
 
-      block.title = `${c.code}${typeLabel} — ${c.label}\n${displayStart}–${displayEnd}\n${c.room}${c.building ? " (" + c.building + ")" : ""}`;
+      block.title = `${c.code}${typeLabel} \u2014 ${c.label}\n${displayStart}\u2013${displayEnd}\n${c.room}${c.building ? " (" + c.building + ")" : ""}`;
 
       dayContainers[c.day].appendChild(block);
     });
   }
 
-  // TZ toggle
   document.querySelectorAll(".tz-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tz-btn").forEach(b => b.classList.remove("active"));

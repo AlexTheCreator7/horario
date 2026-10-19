@@ -5,7 +5,7 @@ M.Sc. Geowissenschaften (Geochemie/Petrologie) — Campus Poppelsdorf.
 
 ## Features
 
-- Weekly grid with all registered courses
+- Weekly grid with all registered courses + sports
 - Dark mode support (follows system preference)
 - Timezone toggle: Bonn (CEST) ↔ Lima (PET)
 - Overlap detection highlighted on Tuesday
@@ -22,7 +22,9 @@ M.Sc. Geowissenschaften (Geochemie/Petrologie) — Campus Poppelsdorf.
 | MGP 20 | Planetologie und Kosmochemie (V) | Tue |
 | SDK-AS 02 | Deutsch als Fremdsprache A1.1 | Mon & Wed |
 | BW37 | Digitale Karte in der Geologie (V) | Thu |
-| MG42 | Dynamik der festen Erde (V) | Thu |
+| MG42 | 3D-Modellierung geologischer Strukturen (V+Ü) | Thu |
+| Zumba | Hochschulsport | Tue |
+| Vóley | Beachvolleyball | Fri |
 
 ## Usage
 

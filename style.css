@@ -5,6 +5,7 @@
   --c-mgp20:  #ef4444;
   --c-deutsch:#8b5cf6;
   --c-mg42:   #ec4899;
+  --c-sport:  #22c55e;
 
   --bg:       #fafafa;
   --surface:  #ffffff;
@@ -48,13 +49,11 @@ body {
   padding: 2rem 1rem;
 }
 
-/* Header */
 header { text-align: center; margin-bottom: 1.5rem; }
 h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
 .subtitle { color: var(--text-2); font-size: .95rem; margin-top: .25rem; }
 .meta { color: var(--text-3); font-size: .8rem; margin-top: .25rem; }
 
-/* TZ toggle */
 .tz-toggle {
   display: flex;
   justify-content: center;
@@ -78,10 +77,9 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
   border-color: var(--text);
 }
 
-/* Grid */
 .grid {
   display: grid;
-  grid-template-columns: 60px repeat(4, 1fr);
+  grid-template-columns: 60px repeat(5, 1fr);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -125,10 +123,6 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
 }
 .day-col:last-child { border-right: none; }
 
-.slot-row {
-  display: contents;
-}
-
 .cell {
   border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
   min-height: 18px;
@@ -137,7 +131,6 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
   border-top: 1px solid var(--border);
 }
 
-/* Course blocks */
 .block {
   position: absolute;
   left: 3px;
@@ -168,7 +161,6 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
   box-shadow: 0 0 0 1px rgba(239,68,68,.5);
 }
 
-/* Legend */
 .legend {
   margin-top: 1.5rem;
   background: var(--surface);
@@ -214,7 +206,6 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
 }
 .tag.online { color: var(--c-deutsch); }
 
-/* Overlap note */
 .overlap-note {
   margin-top: 1rem;
   padding: .75rem 1rem;
@@ -225,7 +216,6 @@ h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
   color: var(--text);
 }
 
-/* Footer */
 footer {
   margin-top: 1.5rem;
   text-align: center;
@@ -233,11 +223,10 @@ footer {
   color: var(--text-3);
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .container { padding: 1rem .5rem; }
   h1 { font-size: 1.35rem; }
-  .grid { grid-template-columns: 44px repeat(4, 1fr); }
+  .grid { grid-template-columns: 44px repeat(5, 1fr); }
   .time-label { font-size: .55rem; }
   .block { padding: .25rem .3rem; font-size: .6rem; }
   .block .code { font-size: .65rem; }
